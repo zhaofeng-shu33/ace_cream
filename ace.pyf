@@ -1,0 +1,40 @@
+!    -*- f90 -*-
+! Note: the context of this file is case sensitive.
+
+python module ace_internal ! in 
+    interface  ! in :ace_internal
+        subroutine mace(p,n,x,y,w,l,delrsq,ns,tx,ty,rsq,ierr,m,z) ! in :ace_internal:ace.f
+            integer, optional,check(shape(x,0)==p),depend(x) :: p=shape(x,0)
+            integer, optional,check(shape(x,1)==n),depend(x) :: n=shape(x,1)
+            double precision dimension(p,n) :: x
+            double precision dimension(n),depend(n) :: y
+            double precision dimension(n),depend(n) :: w
+            integer dimension(p + 1),depend(p) :: l
+            double precision :: delrsq
+            integer :: ns
+            double precision dimension(n,p,ns),intent(out),depend(n,p,ns) :: tx
+            double precision dimension(n,ns),intent(out),depend(n,ns) :: ty
+            double precision dimension(ns),intent(out),depend(ns) :: rsq
+            integer,intent(out) :: ierr            
+            integer dimension(n,p + 1),depend(n,p) :: m
+            double precision dimension(n,12),depend(n) :: z
+            double precision :: alpha
+            double precision :: big
+            double precision :: span
+            integer :: maxit
+            integer :: nterm
+            common /prams/ alpha,big,span,maxit,nterm
+        end subroutine mace
+        block data acedata ! in :ace_internal:ace.f
+            double precision, optional :: alpha=0.0
+            double precision, optional :: big=1e+20
+            double precision, optional :: span=0.0
+            integer, optional :: maxit=20
+            integer, optional :: nterm=3
+            common /prams/ alpha,big,span,maxit,nterm
+        end block data acedata
+    end interface 
+end python module ace_internal
+
+! This file was auto-generated with f2py (version:2).
+! See http://cens.ioc.ee/projects/f2py2e/

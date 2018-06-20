@@ -13,7 +13,17 @@ You need `numpy` and fortran compiler to build from source.
 
 * Install MinGW-w64 and add `{install_dir}\mingw64\bin` path to environment variable (make `gfortran` accessible from command line).
 
-** (for conda environment) Add `{install_dir}\Anaconda3\Scripts` to environment variable (make `f2py` accessible from command line).
+  * (for conda environment) Add `{install_dir}\Anaconda3\Scripts` to environment variable (make `f2py` accessible from command line).
+
+    
+
+### Mac
+
+You can use package manager to install `gfortran` (included within gnu compiler collection). For example, with `Homebrew` you can use
+
+```shell
+brew install gcc
+```
 
 Run `python setup.py install` from command line at the project root directory.
 

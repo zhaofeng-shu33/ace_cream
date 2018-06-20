@@ -7,4 +7,4 @@ if os.name == 'nt':
         os.environ['PATH'] += os.pathsep + extra_dll_dir
     else:
         raise ImportError('ace_cream/.libs not found')
-from ace_cream import ace_cream
+from .ace_cream import ace_cream

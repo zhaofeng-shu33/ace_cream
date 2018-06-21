@@ -9,7 +9,7 @@ ext_internal = Extension(name = 'ace_internal', sources = ['ace.pyf',
 ext = Extension(name = 'ace_cream.ace_cream', sources = 'ace_cream.py')                
 if __name__ == '__main__':
     setup(name = 'ace_cream',
-          version = '0.2.post1',
+          version = '0.2.post3',
           description = 'Alternating Conditional\
  Expectation Algorithm',
           author = 'zhaofeng-shu33',

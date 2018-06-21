@@ -62,7 +62,41 @@ def ace_cream(x, y, wt = None, delrsq = 0.01, ns = 1, cat = None):
     tx, ty, rsq, ierr = ace_internal.mace(x = x_internal.T, y = y, w = wt, l = l, delrsq = delrsq, m = m, z= z, ns = ns, p = p, n = x_row)
     if not(ierr == 0): # number dimension overflow
         raise ValueError("number dimension overflow")
-    return (tx[:,:,0], ty)
+    if(ns == 1):
+        return (tx[:,:,0], ty)
+    else:
+        return (tx, ty)
+
+def f_mapping(x, tx, x_candidate):
+    '''
+    given x and tx, find f(x) = tx and return 
+    t_x_candidate = f(x_candidate)
+    only used for discrete random variable X
+
+    Parameters
+    ----------
+    x : array-like or list
+    tx : array-like
+         transformated feature of x, same dimension with x
+    x_candidate : array-like or list
+
+    Returns
+    -------
+    t_x_candidate : array-like
+
+    '''
+    f = {}
+    feature_vector_dim = tx.shape[1]
+    for i in range(len(x)):
+        f[x[i]] = tx[i,:]
+    t_x_candidate = np.zeros([len(x_candidate), feature_vector_dim])
+
+    for i in range(len(x_candidate)):
+        if f.get(x_candidate[i]) is None:
+            t_x_candidate[i,:] = x[0,:]
+        else:
+            t_x_candidate[i,:] = f[x_candidate[i]]
+    return t_x_candidate
 
 if __name__ == '__main__':
     TWOPI = 2 * np.pi

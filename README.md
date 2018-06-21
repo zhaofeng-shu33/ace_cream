@@ -31,7 +31,7 @@ Run `python setup.py install` from command line at the project root directory.
 ## change log
 v0.1 initial commit
 v0.2 modify to relative import in `__init__.py`
-
+v0.3 add support for multiple columns of x and other directions of transformation
 ## License
 
 Apache License Version 2.0

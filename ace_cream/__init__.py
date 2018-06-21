@@ -8,3 +8,4 @@ if os.name == 'nt':
     else:
         raise ImportError('ace_cream/.libs not found')
 from .ace_cream import ace_cream
+from .ace_cream import f_mapping

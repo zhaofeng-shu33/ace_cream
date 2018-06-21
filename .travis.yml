@@ -9,7 +9,7 @@ install:
   - pip install numpy
 script:
   - python setup.py install
-  - cd example
-  - python BSC.py
-  - python BEC.py
+  - python -m unittest tests
+  - python example/BSC.py
+  - python example/BEC.py
 

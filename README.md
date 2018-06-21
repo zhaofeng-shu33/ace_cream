@@ -37,10 +37,10 @@ sudo apt-get install gfortran
 Run `python setup.py install` from command line at the project root directory.
 
 ## change log
-v0.1 initial commit
-v0.2 modify to relative import in `__init__.py`
-v0.3 add support for multiple columns of x and other directions of transformation
-v0.4 add `f_mapping` function and unittests for this function
-## License
+> v0.1 initial commit
+> v0.2 modify to relative import in `__init__.py`
+> v0.3 add support for multiple columns of x and other directions of transformation
+> v0.4 add `f_mapping` function and unittests for this function
 
+## License
 Apache License Version 2.0

@@ -1,0 +1,1 @@
+python3 -u -c "import setuptools, tokenize;__file__='./setup.py';f=getattr(tokenize, 'open', open)(__file__);code=f.read().replace('\r\n', '\n');f.close();exec(compile(code, __file__, 'exec'))" bdist_wheel -d ./

@@ -14,6 +14,7 @@ def ace_cream(x, y, wt = None, delrsq = 0.01, ns = 1, cat = None):
     ----------
     x : array_like
         a matrix containing the independent variables.
+        each row is an obversation of data.
     y : array_like
         a vector containing the response variable.
     wt : array_like or None, optional
@@ -61,7 +62,7 @@ def ace_cream(x, y, wt = None, delrsq = 0.01, ns = 1, cat = None):
     tx, ty, rsq, ierr = ace_internal.mace(x = x_internal.T, y = y, w = wt, l = l, delrsq = delrsq, m = m, z= z, ns = ns, p = p, n = x_row)
     if not(ierr == 0): # number dimension overflow
         raise ValueError("number dimension overflow")
-    return (tx[:,0,:], ty)
+    return (tx[:,:,0], ty)
 
 if __name__ == '__main__':
     TWOPI = 2 * np.pi

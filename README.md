@@ -36,6 +36,15 @@ sudo apt-get install gfortran
 
 Run `python setup.py install` from command line at the project root directory.
 
+## Install Binary Distribution
+Currently, only 64-bit binary distribution is provided.
+
+| Platform  | py3.5 | py3.6 | py2.7 |
+| --------- |:-----:|:-----:|:-----:|
+| Windows   |   T   |   T   |   T   | 
+| MacOS     |       |       |       |
+| Linux     |       |       |       |
+
 ## change log
 > v0.1 initial commit
 > v0.2 modify to relative import in `__init__.py`

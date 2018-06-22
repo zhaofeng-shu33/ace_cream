@@ -9,7 +9,7 @@ ext_internal = Extension(name = 'ace_internal', sources = ['ace.pyf',
 ext = Extension(name = 'ace_cream.ace_cream', sources = 'ace_cream.py')                
 if __name__ == '__main__':
     setup(name = 'ace_cream',
-          version = '0.4.post1',
+          version = '0.4.post2',
           description = 'Alternating Conditional\
  Expectation Algorithm',
           author = 'zhaofeng-shu33',
@@ -17,7 +17,8 @@ if __name__ == '__main__':
           url = 'https://github.com/zhaofeng-shu33/ace_cream',
           maintainer = 'zhaofeng-shu33',
           maintainer_email = '616545598@qq.com',
-          long_description = long_description,          
+          long_description = long_description,  
+          install_requires = ['numpy'],
           ext_modules = [ext_internal],
           license = 'Apache License Version 2.0',
           packages = ['ace_cream'],

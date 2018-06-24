@@ -78,7 +78,7 @@ How to use
     n = np.random.choice([0,1], size=N_SIZE, p=[0.9, 0.1])
     y = np.mod(x + n, 2)
     # set both x(cat=0) and y(cat = -1) as categorical type
-    tx, ty = ace_cream(x, y, cat = [-1,0])
+    tx, ty = ace_cream(x, y, cat=[-1,0])
 
     # continuous case
     x = np.random.uniform(0, np.pi, 200)
@@ -96,10 +96,11 @@ Result
 change log
 ----------
 
-    v0.1 initial commit v0.2 modify to relative import in
-    ``__init__.py`` v0.3 add support for multiple columns of x and other
-    directions of transformation v0.4 add ``f_mapping`` function and
-    unittests for this function
+1. v0.1 initial commit
+2. v0.2 modify to relative import in ``__init__.py``
+3. v0.3 add support for multiple columns of x and other directions of
+   transformation
+4. v0.4 add ``f_mapping`` function and unittests for this function
 
 License
 -------

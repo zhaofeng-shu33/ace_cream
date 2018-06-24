@@ -51,13 +51,58 @@ To install ``gfortran``, use the default package manager:
 Run ``python setup.py install`` from command line at the project root
 directory.
 
+Install Binary Distribution
+---------------------------
+
+Currently, only 64-bit binary distribution is provided.
+
++------------+---------+---------+---------+
+| Platform   | py3.5   | py3.6   | py2.7   |
++============+=========+=========+=========+
+| Windows    | T       | T       | T       |
++------------+---------+---------+---------+
+| MacOS      |         | T       | T       |
++------------+---------+---------+---------+
+| Linux      |         |         |         |
++------------+---------+---------+---------+
+
+How to use
+----------
+
+.. code:: python
+
+    import numpy as np
+    from ace_cream import ace_cream
+    # discrete case, binary symmetric channel with crossover probability 0.1
+    x = np.random.choice([0,1], size=N_SIZE)
+    n = np.random.choice([0,1], size=N_SIZE, p=[0.9, 0.1])
+    y = np.mod(x + n, 2)
+    # set both x(cat=0) and y(cat = -1) as categorical type
+    tx, ty = ace_cream(x, y, cat = [-1,0])
+
+    # continuous case
+    x = np.random.uniform(0, np.pi, 200)
+    y = np.exp(np.sin(x)+np.random.normal(size=200)/2)
+    tx, ty = ace_cream(x, y)
+
+Result
+------
+
+.. figure:: ./example/continuous.svg
+   :alt: image
+
+   image
+
 change log
 ----------
 
-v0.1 initial commit v0.2 modify to relative import in ``__init__.py``
-v0.3 add support for multiple columns of x and other directions of
-transformation v0.4 add ``f_mapping`` function and unittests for this
-function ## License
+    v0.1 initial commit v0.2 modify to relative import in
+    ``__init__.py`` v0.3 add support for multiple columns of x and other
+    directions of transformation v0.4 add ``f_mapping`` function and
+    unittests for this function
+
+License
+-------
 
 Apache License Version 2.0
 

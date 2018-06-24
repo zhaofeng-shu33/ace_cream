@@ -11,9 +11,9 @@ if __name__ == '__main__':
     N_SIZE = 1000
     P_CROSSOVER = 0.1
     x = np.random.choice([0,1],size=N_SIZE)
-    y = np.random.uniform(size=N_SIZE)
-    y = y > (1- P_CROSSOVER)
-    y = y*(1-x) + (1-y)*x
+    n = np.random.choice([0,1], size = N_SIZE, p = [1 - P_CROSSOVER, P_CROSSOVER])
+    y = np.mod(x+n, 2)
+
     # x = a_1 * x + a_2
     # y = b_1 * y + b_2 
     # a_1, a_2, b_1, and b_2 are constants has no influence on the result

@@ -12,4 +12,4 @@ script:
   - python tests/ace_cream_test.py
   - python example/BSC.py
   - python example/BEC.py
-
+  - python example/continuous.py

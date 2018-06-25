@@ -43,7 +43,7 @@ Currently, only 64-bit binary distribution is provided.
 | -------- | :---: | :---: | :---: |
 | Windows  |   T   |   T   |   T   |
 | MacOS    |       |   T   |   T   |
-| Linux    |       |       |       |
+| Linux    |   T   |   T   |   T   |
 
 ## How to use
 

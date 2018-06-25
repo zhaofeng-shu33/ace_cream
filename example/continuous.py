@@ -6,7 +6,7 @@ from ace_cream import ace_cream
 HAS_MATPLOTLIB = True
 try:
     import matplotlib.pyplot as plt
-except ModuleNotFoundError as e:
+except ModuleNotFoundError or ImportError as e:
     HAS_MATPLOTLIB = False
     pass
 if __name__ == '__main__':

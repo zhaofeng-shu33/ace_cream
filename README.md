@@ -1,6 +1,5 @@
 # Alternating Conditional Expectation Algorithm
 [![Build Status](https://travis-ci.org/zhaofeng-shu33/ace_cream.svg?branch=master)](https://travis-ci.org/zhaofeng-shu33/ace_cream)
-[![pypi-version]][pypi]
 
 This project provides a wrapper program of Python for ACE algorithm implementation of Fortran.
 

@@ -1,5 +1,6 @@
 # Alternating Conditional Expectation Algorithm
 [![Build Status](https://travis-ci.org/zhaofeng-shu33/ace_cream.svg?branch=master)](https://travis-ci.org/zhaofeng-shu33/ace_cream)
+[![pypi-version]](https://pypi.org/project/ace_cream)
 
 This project provides a wrapper program of Python for ACE algorithm implementation of Fortran.
 
@@ -54,7 +55,7 @@ from ace_cream import ace_cream
 x = np.random.choice([0,1], size=N_SIZE)
 n = np.random.choice([0,1], size=N_SIZE, p=[0.9, 0.1])
 y = np.mod(x + n, 2)
-# set both x(cat=0) and y(cat = -1) as categorical type
+# set both x(cat=0) and y(cat=-1) as categorical type
 tx, ty = ace_cream(x, y, cat=[-1,0])
 
 # continuous case

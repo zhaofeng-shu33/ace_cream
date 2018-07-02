@@ -3,6 +3,16 @@
 
 This project provides a wrapper program of Python for ACE algorithm implementation of Fortran.
 
+## Install Binary Distribution
+Currently, only 64-bit binary distribution is provided.
+Run `pip install ace_cream` to install the binary distribution.
+
+| Platform | py3.5 | py3.6 | py2.7 |
+| -------- | :---: | :---: | :---: |
+| Windows  |   T   |   T   |   T   |
+| MacOS    |       |   T   |   T   |
+| Linux    |   T   |   T   |   T   |
+
 ## How to build
 You need `numpy` and fortran compiler to build from source.
 
@@ -35,15 +45,6 @@ sudo apt-get install gfortran
 ```
 
 Run `python setup.py install` from command line at the project root directory.
-
-## Install Binary Distribution
-Currently, only 64-bit binary distribution is provided.
-
-| Platform | py3.5 | py3.6 | py2.7 |
-| -------- | :---: | :---: | :---: |
-| Windows  |   T   |   T   |   T   |
-| MacOS    |       |   T   |   T   |
-| Linux    |   T   |   T   |   T   |
 
 ## How to use
 

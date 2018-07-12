@@ -14,7 +14,7 @@ def ace_cream(x, y, wt = None, delrsq = 0.01, ns = 1, cat = None):
     ----------
     x : array_like
         a matrix containing the independent variables.
-        each row is an obversation of data.
+        each row is an observation of data.
     y : array_like
         a vector containing the response variable.
     wt : array_like or None, optional

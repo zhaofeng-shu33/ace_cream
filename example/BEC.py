@@ -33,4 +33,4 @@ if __name__ == '__main__':
     print('mean(tx) = %f, std(tx) = %f'%(np.mean(tx), np.std(tx)))
     print('mean(ty) = %f, std(ty) = %f'%(np.mean(ty), np.std(ty)))
     print('rho(tx,ty)',pearson_correlation(tx,ty))
-
+    # matches theoretical result: np.sqrt(1-ERROR_PROBABILITY)

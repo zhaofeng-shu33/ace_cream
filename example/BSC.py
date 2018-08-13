@@ -9,7 +9,7 @@ def pearson_correlation(X,Y):
 
 if __name__ == '__main__':
     N_SIZE = 1000
-    P_CROSSOVER = 0.1
+    P_CROSSOVER = 0.8
     x = np.random.choice([0,1],size=N_SIZE)
     n = np.random.choice([0,1], size = N_SIZE, p = [1 - P_CROSSOVER, P_CROSSOVER])
     y = np.mod(x+n, 2)

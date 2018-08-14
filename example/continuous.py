@@ -12,7 +12,9 @@ except Exception as e:
 if __name__ == '__main__':
     x = np.random.uniform(0,2*np.pi,400)
     y = np.exp(np.sin(x)+np.random.normal(size = 400)/2)
+    print(np.corrcoef(x,y)[0,1])
     tx, ty = ace_cream(x, y)
+    print(np.corrcoef(tx[:,0],ty[:,0])[0,1])
     if(HAS_MATPLOTLIB):
         plt.subplot(2,1,1)
         plt.title('np.exp(np.sin(x))')

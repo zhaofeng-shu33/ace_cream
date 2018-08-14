@@ -13,6 +13,6 @@ if os.name == 'nt':
     if(HAS_DLL):
         os.environ['PATH'] += os.pathsep + extra_dll_dir
     else:
-        raise ImportError('directory %s ace_cream/.libs or %s ace_internal/.libs not found'.format(get_python_lib(),get_python_lib()))
+        raise ImportError('directory %s/ace_cream/.libs or %s/ace_internal/.libs not found'%(get_python_lib(),get_python_lib()))
 from .ace_cream import ace_cream
 from .ace_cream import f_mapping

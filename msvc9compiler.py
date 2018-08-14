@@ -61,32 +61,6 @@ PLAT_TO_VCVARS = {
     'win-ia64' : 'ia64',
 }
 
-# Add the first found value of InstallationFolder from this list of
-# keys to %PATH%
-WINSDK_PATH_KEYS = [KEY_BASE + "Microsoft SDKs\\Windows\\" + rest for rest in (
-    r"v%s\WinSDKWin32Tools-x64" if NATIVE_WIN64 else r"v%s\WinSDKWin32Tools",
-    r"v%s\WinSDKTools-x64" if NATIVE_WIN64 else r"v%s\WinSDKTools",
-    r"v%s",
-    r"v%sA"
-)]
-
-# Add the first found value of InstallationFolder, plus "include", from
-# this list of keys to %INCLUDE%.
-# Add the same value, plus "lib", to %LIB% and %LIBPATH%
-WINSDK_INCLUDE_KEYS = [KEY_BASE + "Microsoft SDKs\\Windows\\" + rest for rest in (
-    r"v%s\WinSDKBuild",
-    r"v%s",
-    r"v%sA"
-)]
-
-# A map from VC version to Windows SDK version, to be used as the format
-# parameter for each element of WINSDK_INCLUDE_KEYS.
-WINSDK_VERSION_MAP = {
-    '9.0': '7.0',
-    '10.0': '7.1',
-    '11.0': '8.0'
-}
-
 class Reg:
     """Helper class to read values from the registry
     """
@@ -242,8 +216,7 @@ def removeDuplicates(variable):
     newVariable = os.pathsep.join(newList)
     return newVariable
 
-# deprecated
-def find_vcvarsall(version):
+def find_vcvarsall(version, arch="x86"):
     """Find the vcvarsall.bat file
 
     At first it tries to find the productdir of VS 2008 in the registry. If
@@ -281,6 +254,21 @@ def find_vcvarsall(version):
     if not productdir:
         log.debug("No productdir found")
         return None
+
+    # This file is not present in the Express version.
+    f = os.path.join(productdir, "bin\\amd64\\vcvarsamd64.bat")
+    if arch in ["amd64", "x86_amd64", "x86_ia64"] and not os.path.isfile(f):
+        # Visual Studio Express with SDK 64-bit tools, workaround
+        # for broken paths in vcvarsall.bat.
+        path = "bin\\vcvars64.bat"
+        if arch != "amd64":
+            path = "bin\\vcvars" + arch + ".bat"
+        f = os.path.join(productdir, path)
+        if not os.path.isfile(f):
+            raise DistutilsPlatformError("Visual Studio Express: need 64-bit "
+                                         "tools from the SDK")
+        return f
+
     vcvarsall = os.path.join(productdir, "vcvarsall.bat")
     if os.path.isfile(vcvarsall):
         return vcvarsall
@@ -290,88 +278,41 @@ def find_vcvarsall(version):
 def query_vcvarsall(version, arch="x86"):
     """Launch vcvarsall.bat and read the settings from its environment
     """
-    result = {
-        "path": "",
-        "include": "",
-        "lib": "",
-    }
-    
-    versionstr = '%.1f' % version
-    sdkver = WINSDK_VERSION_MAP[versionstr]
-    
-    # set PATH to include:
-    #   %VCINSTALLDIR%\bin
-    #   %VCINSTALLDIR%\VCPackages
-    #   %VSINSTALLDIR%\Common7\IDE (if it exists)
-    #   %VSINSTALLDIR%\Common7\Tools (if it exists)
-    #   %VSINSTALLDIR%\Common7\Tools\bin (if it exists)
-    #   %FrameworkDir%\%Framework35Version%
-    #   %FrameworkDir%\%FrameworkVersion%
-    #   %WindowsSdkDir%bin
-    
-    vcpaths = Reg.read_values(_winreg.HKEY_LOCAL_MACHINE, VC_SXS_KEY)
-    vcinstalldir = vcpaths[versionstr]
-    vsinstalldir = Reg.read_values(_winreg.HKEY_LOCAL_MACHINE, VS_SXS_KEY).get(versionstr, vcinstalldir + "..")
-    
-    if vcinstalldir:
-        if arch == "x86":
-            result["path"] += "%s\\bin;%s\\VCPackages;" % (vcinstalldir, vcinstalldir)
-        else:
-            result["path"] += "%s\\bin\\%s;%s\\VCPackages;" % (vcinstalldir, arch, vcinstalldir)
-    
-    if vsinstalldir:
-        result["path"] += "%s\\Common7\\IDE;%s\\Tools;%s\\Tools\\bin;" % (vsinstalldir, vsinstalldir, vsinstalldir)
-    
-    frameworkdir = vcpaths.get("frameworkdir64" if arch == "amd64" else "frameworkdir32")
-    if frameworkdir:
-        result["path"] += frameworkdir + r"\v3.5;"
-        frameworkver = vcpaths.get("frameworkver64" if arch == "amd64" else "frameworkdir32")
-        if frameworkver:
-            result["path"] += r"%s\%s;" % (frameworkdir, frameworkver)
-    
-    for sdkkey in WINSDK_PATH_KEYS:
-        try:
-            sdk_install = Reg.get_value(sdkkey % sdkver, "installationfolder")
-        except KeyError:
-            pass
-        else:
-            result["path"] += sdk_install + ";"
-            break
-    else:
-        log.debug("no Windows SDK found")
-    
-    # set INCLUDE to include:
-    #   %WindowsSdkDir%include
-    #   %VCINSTALLDIR%\include
-    # and LIB to include
-    #   %WindowsSdkDir%lib[\x64|\amd64|\ia64]
-    #   %VCINSTALLDIR%\lib[\x64|\amd64|\ia64]
-    
-    def _add_include_lib_paths(base):
-        result["include"] += base + r"\include;"
-        if arch.endswith("ia64"):
-            result["lib"] += base + r"\lib\ia64;"
-        elif arch.endswith("64") and os.path.isdir(base + r"\lib\x64"):
-            result["lib"] += base + r"\lib\x64;"
-        elif arch.endswith("64") and os.path.isdir(base + r"\lib\amd64"):
-            result["lib"] += base + r"\lib\amd64;"
-        else:
-            result["lib"] += base + r"\lib;"
-    
-    for sdkkey in WINSDK_INCLUDE_KEYS:
-        try:
-            sdk_install = Reg.get_value(sdkkey % sdkver, "installationfolder")
-        except KeyError:
-            pass
-        else:
-            _add_include_lib_paths(sdk_install)
-            break
-    else:
-        log.debug("no Windows SDK found")
-    
-    if vcinstalldir:
-        _add_include_lib_paths(vcinstalldir)
-    
+    vcvarsall = find_vcvarsall(version, arch)
+    interesting = set(("include", "lib", "libpath", "path"))
+    result = {}
+
+    if vcvarsall is None:
+        raise DistutilsPlatformError("Unable to find vcvarsall.bat")
+    log.debug("Calling 'vcvarsall.bat %s' (version=%s)", arch, version)
+    popen = subprocess.Popen('"%s" %s & set' % (vcvarsall, arch),
+                             stdout=subprocess.PIPE,
+                             stderr=subprocess.PIPE)
+    try:
+        stdout, stderr = popen.communicate()
+        if popen.wait() != 0:
+            raise DistutilsPlatformError(stderr.decode("mbcs"))
+
+        stdout = stdout.decode("mbcs")
+        for line in stdout.split("\n"):
+            line = Reg.convert_mbcs(line)
+            if '=' not in line:
+                continue
+            line = line.strip()
+            key, value = line.split('=', 1)
+            key = key.lower()
+            if key in interesting:
+                if value.endswith(os.pathsep):
+                    value = value[:-1]
+                result[key] = removeDuplicates(value)
+
+    finally:
+        popen.stdout.close()
+        popen.stderr.close()
+
+    if len(result) != len(interesting):
+        raise ValueError(str(list(result.keys())))
+
     return result
 
 # More globals

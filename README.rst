@@ -1,10 +1,26 @@
 Alternating Conditional Expectation Algorithm
 =============================================
 
-|Build Status|
+|Build Status| |PyPI|
 
 This project provides a wrapper program of Python for ACE algorithm
 implementation of Fortran.
+
+Install Binary Distribution
+---------------------------
+
+Currently, only 64-bit binary distribution is provided. Run
+``pip install ace_cream`` to install the binary distribution.
+
++----------+-------+-------+-------+
+| Platform | py3.5 | py3.6 | py2.7 |
++==========+=======+=======+=======+
+| Windows  | T     | T     | T     |
++----------+-------+-------+-------+
+| MacOS    |       | T     | T     |
++----------+-------+-------+-------+
+| Linux    | T     | T     | T     |
++----------+-------+-------+-------+
 
 How to build
 ------------
@@ -26,8 +42,8 @@ Windows
    environment variable (make ``gfortran`` accessible from command
    line).
 
--  (for conda environment) Add ``{install_dir}\Anaconda3\Scripts`` to
-   environment variable (make ``f2py`` accessible from command line).
+   -  (for conda environment) Add ``{install_dir}\Anaconda3\Scripts`` to
+      environment variable (make ``f2py`` accessible from command line).
 
 Mac
 ~~~
@@ -37,7 +53,7 @@ compiler collection). For example, with ``Homebrew`` you can use
 
 .. code:: shell
 
-    brew install gcc
+   brew install gcc
 
 Ubuntu
 ~~~~~~
@@ -46,44 +62,29 @@ To install ``gfortran``, use the default package manager:
 
 .. code:: shell
 
-    sudo apt-get install gfortran
+   sudo apt-get install gfortran
 
 Run ``python setup.py install`` from command line at the project root
 directory.
-
-Install Binary Distribution
----------------------------
-
-Currently, only 64-bit binary distribution is provided.
-
-+------------+---------+---------+---------+
-| Platform   | py3.5   | py3.6   | py2.7   |
-+============+=========+=========+=========+
-| Windows    | T       | T       | T       |
-+------------+---------+---------+---------+
-| MacOS      |         | T       | T       |
-+------------+---------+---------+---------+
-| Linux      |         |         |         |
-+------------+---------+---------+---------+
 
 How to use
 ----------
 
 .. code:: python
 
-    import numpy as np
-    from ace_cream import ace_cream
-    # discrete case, binary symmetric channel with crossover probability 0.1
-    x = np.random.choice([0,1], size=N_SIZE)
-    n = np.random.choice([0,1], size=N_SIZE, p=[0.9, 0.1])
-    y = np.mod(x + n, 2)
-    # set both x(cat=0) and y(cat = -1) as categorical type
-    tx, ty = ace_cream(x, y, cat=[-1,0])
+   import numpy as np
+   from ace_cream import ace_cream
+   # discrete case, binary symmetric channel with crossover probability 0.1
+   x = np.random.choice([0,1], size=N_SIZE)
+   n = np.random.choice([0,1], size=N_SIZE, p=[0.9, 0.1])
+   y = np.mod(x + n, 2)
+   # set both x(cat=0) and y(cat=-1) as categorical type
+   tx, ty = ace_cream(x, y, cat=[-1,0])
 
-    # continuous case
-    x = np.random.uniform(0, np.pi, 200)
-    y = np.exp(np.sin(x)+np.random.normal(size=200)/2)
-    tx, ty = ace_cream(x, y)
+   # continuous case
+   x = np.random.uniform(0, np.pi, 200)
+   y = np.exp(np.sin(x)+np.random.normal(size=200)/2)
+   tx, ty = ace_cream(x, y)
 
 Result
 ------
@@ -109,3 +110,5 @@ Apache License Version 2.0
 
 .. |Build Status| image:: https://travis-ci.org/zhaofeng-shu33/ace_cream.svg?branch=master
    :target: https://travis-ci.org/zhaofeng-shu33/ace_cream
+.. |PyPI| image:: https://img.shields.io/badge/pypi-0.4.post4-blue.svg
+   :target: https://pypi.org/project/ace_cream

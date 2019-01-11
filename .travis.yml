@@ -1,15 +1,16 @@
 language: python
-python:
-  - "3.6"
-  - "3.5"
-  - "2.7"
+python: 3.6
+services: docker
+env: DOCKER_IMAGE=quay.io/pypa/manylinux1_x86_64
 before_install:
   - sudo apt-get install gfortran
 install:
-  - pip install numpy
+  - pip install numpy, twine
 script:
   - python setup.py install
   - python tests/ace_cream_test.py
   - python example/BSC.py
   - python example/BEC.py
   - python example/continuous.py
+  - docker run --rm -v `pwd`:/io $DOCKER_IMAGE /io/build_wheels.sh
+  - twine upload build/* -u zhaofeng-shu33 

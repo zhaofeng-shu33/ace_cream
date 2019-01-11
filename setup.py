@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 from numpy.distutils.core import Extension, setup
-with open("README.md") as fh:
+with open("README.rst") as fh:
     long_description = fh.read()
 ext_internal = Extension(name = 'ace_internal', sources = ['ace.pyf',
                 'ace.f', 'avas.f', 'rlsmo.f'
@@ -9,7 +9,7 @@ ext_internal = Extension(name = 'ace_internal', sources = ['ace.pyf',
 ext = Extension(name = 'ace_cream.ace_cream', sources = 'ace_cream.py')                
 if __name__ == '__main__':
     setup(name = 'ace_cream',
-          version = '0.4.post10',
+          version = '0.4.post11',
           description = 'Alternating Conditional\
  Expectation Algorithm',
           author = 'zhaofeng-shu33',
@@ -18,7 +18,6 @@ if __name__ == '__main__':
           maintainer = 'zhaofeng-shu33',
           maintainer_email = '616545598@qq.com',
           long_description = long_description,  
-          long_description_content_type = 'text/markdown',
           install_requires = ['numpy'],
           ext_modules = [ext_internal],
           license = 'Apache License Version 2.0',

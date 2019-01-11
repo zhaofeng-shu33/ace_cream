@@ -1,7 +1,9 @@
 Alternating Conditional Expectation Algorithm
 =============================================
 
-|Build Status| |PyPI|
+`Build Status <https://travis-ci.org/zhaofeng-shu33/ace_cream>`__
+`PyPI <https://pypi.org/project/ace_cream>`__
+`Windows <https://ci.appveyor.com/project/zhaofeng-shu33/ace_cream>`__
 
 This project provides a wrapper program of Python for ACE algorithm
 implementation of Fortran.
@@ -13,7 +15,7 @@ Currently, only 64-bit binary distribution is provided. Run
 ``pip install ace_cream`` to install the binary distribution.
 
 +----------+-------+-------+-------+
-| Platform | py3.5 | py3.6 | py2.7 |
+| Platform | py3.6 | py3.7 | py2.7 |
 +==========+=======+=======+=======+
 | Windows  | T     | T     | T     |
 +----------+-------+-------+-------+
@@ -108,7 +110,7 @@ License
 
 Apache License Version 2.0
 
-.. |Build Status| image:: https://travis-ci.org/zhaofeng-shu33/ace_cream.svg?branch=master
-   :target: https://travis-ci.org/zhaofeng-shu33/ace_cream
-.. |PyPI| image:: https://img.shields.io/badge/pypi-0.4.post4-blue.svg
-   :target: https://pypi.org/project/ace_cream
+Reference
+---------
+
+1. https://en.wikipedia.org/wiki/Alternating_conditional_expectations

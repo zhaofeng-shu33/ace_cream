@@ -76,3 +76,6 @@ tx, ty = ace_cream(x, y)
 
 ## License
 Apache License Version 2.0
+
+## Reference
+1. [https://en.wikipedia.org/wiki/Alternating_conditional_expectations](https://en.wikipedia.org/wiki/Alternating_conditional_expectations)

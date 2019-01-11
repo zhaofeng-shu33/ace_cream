@@ -7,7 +7,7 @@ install:
 - cmd: >-
     C:\Miniconda-x64\Scripts\conda.exe install --yes numpy twine
 
-    copy .\msvc9compiler.py C:\Miniconda-x64\Lib\distutils\msvc9compiler.py
+    #copy .\msvc9compiler.py C:\Miniconda-x64\Lib\distutils\msvc9compiler.py
 build_script:
 - cmd: >-
     C:\Miniconda-x64\python.exe -m pip wheel . -w build

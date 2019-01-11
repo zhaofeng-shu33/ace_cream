@@ -9,7 +9,10 @@ install:
 
     copy .\msvc9compiler.py C:\Miniconda-x64\Lib\distutils\msvc9compiler.py
 build_script:
-- cmd: C:\Miniconda-x64\python.exe setup.py install
+- cmd: >-
+    C:\Miniconda-x64\python.exe -m pip wheel . -w build
+
+    C:\Minoconda-x64\python.exe -m pip install ace_cream --no-index -f build
 test_script:
 - cmd: >-
     C:\Miniconda-x64\python.exe tests/ace_cream_test.py

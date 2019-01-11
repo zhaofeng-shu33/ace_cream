@@ -7,9 +7,9 @@ This project provides a wrapper program of Python for ACE algorithm implementati
 
 ## Install Binary Distribution
 Currently, only 64-bit binary distribution is provided.
-Run `pip install ace_cream==0.4.post4` to install the binary distribution.
+Run `pip install ace_cream` to install the binary distribution.
 
-| Platform | py3.5 | py3.6 | py2.7 |
+| Platform | py3.6 | py3.7 | py2.7 | 
 | -------- | :---: | :---: | :---: |
 | Windows  |   T   |   T   |   T   |
 | MacOS    |       |   T   |   T   |

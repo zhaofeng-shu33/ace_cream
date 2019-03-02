@@ -13,4 +13,4 @@ script:
   - python example/BEC.py
   - python example/continuous.py
   - docker run --rm -v `pwd`:/io $DOCKER_IMAGE /io/build_wheels.sh
-  - twine upload build/ace_cream*manylinux* -u zhaofeng-shu33 
+  - twine upload build/ace_cream*manylinux* -u zhaofeng-shu33 && echo Success || echo "upload failed"

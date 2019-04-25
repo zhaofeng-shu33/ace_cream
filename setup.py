@@ -6,7 +6,6 @@ with open("README.rst") as fh:
 ext_internal = Extension(name = 'ace_internal', sources = ['ace.pyf',
                 'ace.f', 'avas.f', 'rlsmo.f'
                 ])
-ext = Extension(name = 'ace_cream.ace_cream', sources = 'ace_cream.py')                
 if __name__ == '__main__':
     setup(name = 'ace_cream',
           version = '0.4.post11',

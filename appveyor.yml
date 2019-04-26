@@ -23,4 +23,4 @@ test_script:
 
     C:\Miniconda-x64\python.exe example/continuous.py
 
-    C:\Miniconda-x64\python.exe -m twine upload build/ace_cream* -u zhaofeng-shu33
+    C:\Miniconda-x64\python.exe -m twine upload build/ace_cream* -u zhaofeng-shu33 || ver>nul

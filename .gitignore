@@ -1,1 +1,5 @@
+dist/*
+MANIFEST
+ace_cream/__pycache__/*.pyc
+ace_cream.egg-info/*
 build/*
